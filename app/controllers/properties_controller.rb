@@ -19,7 +19,6 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-
     respond_to do |format|
       if @property.save
         format.html { redirect_to property_url(@property), notice: "Property was successfully created." }
@@ -41,6 +40,11 @@ class PropertiesController < ApplicationController
         format.json { render json: @property.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm
+    @property = Property.new(property_params)
+    render :new if @property.invalid?
   end
 
   def destroy
