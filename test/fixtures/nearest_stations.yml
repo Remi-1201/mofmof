@@ -4,10 +4,8 @@ one:
   line: MyString
   station: MyString
   time: 1
-  property_id: 1
 
 two:
   line: MyString
   station: MyString
   time: 1
-  property_id: 1

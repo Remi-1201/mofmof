@@ -15,7 +15,6 @@ class NearestStationsTest < ApplicationSystemTestCase
     click_on "New Nearest Station"
 
     fill_in "Line", with: @nearest_station.line
-    fill_in "Property", with: @nearest_station.property_id
     fill_in "Station", with: @nearest_station.station
     fill_in "Time", with: @nearest_station.time
     click_on "Create Nearest station"
@@ -29,7 +28,6 @@ class NearestStationsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Line", with: @nearest_station.line
-    fill_in "Property", with: @nearest_station.property_id
     fill_in "Station", with: @nearest_station.station
     fill_in "Time", with: @nearest_station.time
     click_on "Update Nearest station"

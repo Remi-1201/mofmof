@@ -65,6 +65,6 @@ class NearestStationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def nearest_station_params
-      params.require(:nearest_station).permit(:line, :station, :time, :property_id)
+      params.require(:nearest_station).permit(:line, :station, :time)
     end
 end

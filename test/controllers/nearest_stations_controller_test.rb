@@ -17,7 +17,7 @@ class NearestStationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create nearest_station" do
     assert_difference('NearestStation.count') do
-      post nearest_stations_url, params: { nearest_station: { line: @nearest_station.line, property_id: @nearest_station.property_id, station: @nearest_station.station, time: @nearest_station.time } }
+      post nearest_stations_url, params: { nearest_station: { line: @nearest_station.line, station: @nearest_station.station, time: @nearest_station.time } }
     end
 
     assert_redirected_to nearest_station_url(NearestStation.last)
@@ -34,7 +34,7 @@ class NearestStationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update nearest_station" do
-    patch nearest_station_url(@nearest_station), params: { nearest_station: { line: @nearest_station.line, property_id: @nearest_station.property_id, station: @nearest_station.station, time: @nearest_station.time } }
+    patch nearest_station_url(@nearest_station), params: { nearest_station: { line: @nearest_station.line, station: @nearest_station.station, time: @nearest_station.time } }
     assert_redirected_to nearest_station_url(@nearest_station)
   end
 
