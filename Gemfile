@@ -16,6 +16,7 @@ gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails' 
 
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'rexml'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -29,9 +30,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
