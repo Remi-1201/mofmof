@@ -1,40 +1,28 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[ show edit update destroy ]
 
-  # GET /properties or /properties.json
   def index
     @properties = Property.all
   end
 
-  # GET /properties/1 or /properties/1.json
-  def show
-  end
-
-  # GET /properties/new
   def new
     @property = Property.new
+    2.times { @property.nearest_stations.build }
   end
 
-  # GET /properties/1/edit
   def edit
+    @property.nearest_stations.build
   end
 
-  # POST /properties or /properties.json
   def create
     @property = Property.new(property_params)
-
-    respond_to do |format|
-      if @property.save
-        format.html { redirect_to property_url(@property), notice: "Property was successfully created." }
-        format.json { render :show, status: :created, location: @property }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
+    if @property.save
+      redirect_to properties_path, notice: "Property was successfully created."
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /properties/1 or /properties/1.json
   def update
     respond_to do |format|
       if @property.update(property_params)
@@ -47,24 +35,23 @@ class PropertiesController < ApplicationController
     end
   end
 
-  # DELETE /properties/1 or /properties/1.json
-  def destroy
-    @property.destroy
+  def confirm
+  end
 
-    respond_to do |format|
-      format.html { redirect_to properties_url, notice: "Property was successfully destroyed." }
-      format.json { head :no_content }
+  def destroy
+    @property.destroy 
+    redirect_to properties_url, notice: "Property was successfully destroyed."
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = Property.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :rent, :address, :age, :note)
+      params.require(:property).permit(:name, :rent, :address, :age, :note,
+        nearest_stations_attributes: %i(property_id line station time))
     end
-end
+  
+
