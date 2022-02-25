@@ -1,0 +1,23 @@
+table {
+  background-color: white;
+  display: table;
+  margin: 30px auto;
+  border: 1px solid transparent;
+  max-width: 100%;
+  padding: 50px 50px;
+}
+
+.th {
+  text-align: center;
+  line-height:30px;
+  width: 70px;
+
+}
+
+.td {
+  text-align: center;
+  line-height:30px;
+  width: 50px;
+  padding: 10px 30px;
+
+}

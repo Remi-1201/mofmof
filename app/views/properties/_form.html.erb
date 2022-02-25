@@ -1,42 +1,44 @@
-<%= form_with(model: property, local: true) do |form| %>
-  <% if property.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+<div class="form">
+  <%= form_with(model: @property, local: true) do |form| %>
+    <% if @property.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+        <ul>
+        <% @property.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% property.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="property">
+      <%= form.label :name, "物件名" %><br>
+      <%= form.text_field :name %><br>
+      <%= form.label :rent, "賃料" %><br>
+      <%= form.number_field :rent %>&emsp;円<br>
+      <%= form.label :address, "住所" %><br>
+      <%= form.text_field :address %><br>
+      <%= form.label :age, "築年数" %><br>
+      <%= form.number_field :age %>&emsp;年<br>
+      <%= form.label :note, "備考" %><br>
+      <%= form.text_area :note %><br>
+  </div> 
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rent %>
-    <%= form.number_field :rent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.number_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :note %>
-    <%= form.text_area :note %>
+  <div class="station">
+    <%= form.fields_for :nearest_stations do |near| %>
+    <% n = 0 %>
+      <h2>最寄り駅&emsp;<%= n += 1 %></h2>
+      <%= near.label "路線名" %><br>
+      <%= near.text_field :line %><br>
+      <%= near.label "駅名" %><br>
+      <%= near.text_field :station %><br>
+      <%= near.label "徒歩分数" %><br>
+      <%= near.text_field :time %><br><br>
+    <% end %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+<div>

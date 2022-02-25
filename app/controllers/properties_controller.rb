@@ -5,9 +5,6 @@ class PropertiesController < ApplicationController
     @properties = Property.all
   end
 
-  def show
-  end
-
   def new
     @property = Property.new
     2.times { @property.nearest_stations.build }
@@ -19,14 +16,10 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-    respond_to do |format|
-      if @property.save
-        format.html { redirect_to property_url(@property), notice: "Property was successfully created." }
-        format.json { render :show, status: :created, location: @property }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
+    if @property.save
+      redirect_to properties_path, notice: "Property was successfully created."
+    else
+      render :new
     end
   end
 
@@ -43,16 +36,11 @@ class PropertiesController < ApplicationController
   end
 
   def confirm
-    @property = Property.new(property_params)
-    render :new if @property.invalid?
   end
 
   def destroy
-    @property.destroy
-
-    respond_to do |format|
-      format.html { redirect_to properties_url, notice: "Property was successfully destroyed." }
-      format.json { head :no_content }
+    @property.destroy 
+    redirect_to properties_url, notice: "Property was successfully destroyed."
     end
   end
 
@@ -65,4 +53,5 @@ class PropertiesController < ApplicationController
       params.require(:property).permit(:name, :rent, :address, :age, :note,
         nearest_stations_attributes: %i(property_id line station time))
     end
-end
+  
+
